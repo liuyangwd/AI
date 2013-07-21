@@ -1,7 +1,5 @@
 <?php
 namespace AI;
-include 'Config.php';
-
 
 class Booter{
 	public function autoload($className){

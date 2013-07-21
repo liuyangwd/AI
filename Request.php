@@ -20,9 +20,11 @@ class Request{
 	}
 	
 	public function getRequestUri(){
-		return $this->_server['REQUEST_URI'];
+		return $this->_requestUri;
 	}
-
+	public function setRequestUri($requestUri){
+		$this->_requestUri = $requestUri;
+	}
 	public function getPost($key = NULL) {
 		if(isset($this->_post[$key]))return $this->_post[$key];
 		else return $this->_post;
@@ -88,6 +90,7 @@ class Request{
 		$this->_cookie = $_COOKIE;
 		$this->_server = $_SERVER;
 		$this->setArgs();
+		$this->_requestUri = $this->_server['REQUEST_URI'];
 	}
 	public function getMethod()
 	{

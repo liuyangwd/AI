@@ -1,6 +1,6 @@
 <?php
 namespace AI;
-include 'Config.php';
+
 class Front{
 	protected $_request;
 	protected $_response;
@@ -17,8 +17,8 @@ class Front{
 	public function run(){
 		
 		$this->_dispatcher->dispatch();
-		$content = ob_get_contents();
-		$this->_response->write($content);
+		//$content = ob_get_contents();
+		//$this->_response->write($content);
 	}
 }
 ?>

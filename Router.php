@@ -3,7 +3,6 @@ namespace AI;
 class Router
 {
 	protected $_request;
-	protected $_requestUri;
 	protected $_controllerPath;
 	protected $_controllerName;
 	protected static $_instance;
@@ -17,7 +16,7 @@ class Router
 	}
 	public function __construct(){
 		$this->setRequest();
-		$this->setRequestUri();
+		
 		$this->route();
 	}
 	public function getControllerPath() {
@@ -28,9 +27,6 @@ class Router
 		return $this->_request;
 	}
 
-	public function getRequestUri() {
-		return $this->_requestUri;
-	}
 
 	public function getControllerName() {
 		return $this->_controllerName;
@@ -40,10 +36,7 @@ class Router
 		$this->_request = Request::getInstance();
 	}
 
-	public function setRequestUri() {
-		$requestServer = $this->getRequest()->getServer();
-		$this->_requestUri = $requestServer['REQUEST_URI'];
-	}
+	
 	public function setControllerName($_controllerName) {
 		$this->_controllerName = $_controllerName;
 	}
@@ -53,7 +46,7 @@ class Router
 	}
 	
 	public function route(){
-		$requestUri = $this->_requestUri;
+		$requestUri = $this->getRequest()->getRequestUri();
 		$requestUriArray = explode('?',$requestUri);
 		$requestUri = $requestUriArray[0];
 		$requestUriArray = explode('!',$requestUri);
@@ -61,6 +54,7 @@ class Router
 		$controllerPath = APPLICATION_PATH.'/controllers'.$requestUri.'.php';
 		$requestUriArray = explode('/',$requestUri);
 		$controllerName = array_pop($requestUriArray);
+		
 		$this->setControllerName($controllerName);
 		$this->setControllerPath($controllerPath);
 		

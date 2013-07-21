@@ -55,6 +55,7 @@ class View{
 			ob_clean();
 			$this->_layout->render();
 		}
+		ob_flush();
 	}
 }	
 ?>
